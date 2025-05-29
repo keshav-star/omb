@@ -1,11 +1,11 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { ExploreHero } from '@/components/sections/ExploreHero';
+// import { motion } from 'framer-motion';
+// import { ExploreHero } from '@/components/sections/ExploreHero';
 import { CategoryGrid } from '@/components/categories/CategoryGrid';
 import { TrendingBios } from '@/components/bios/TrendingBios';
 import { BioFilter } from '@/components/filters/BioFilter';
-import { CallToAction } from '@/components/shared/CallToAction';
+// import CallToAction from '@/components/shared/CallToAction';
 import { BackgroundBeams } from '@/components/ui/background-beams';
 
 export default function ExplorePage() {
@@ -25,12 +25,12 @@ export default function ExplorePage() {
         </section>
 
         <section className="container mx-auto px-4 py-12">
-          <CallToAction 
+          {/* <CallToAction 
             title="Join Our Community"
             description="Be part of a growing community of learners and explorers"
             buttonText="Get Started"
             buttonLink="/signup"
-          />
+          /> */}
         </section>
       </div>
     </main>

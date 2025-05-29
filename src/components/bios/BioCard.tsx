@@ -19,7 +19,7 @@ interface BioCardProps {
 
 export function BioCard({ bio }: BioCardProps) {
   return (
-    <Link href={`/bios/${bio?.name?.toLowerCase().replace(/\s+/g, '-')}`}>
+    <Link href={`/bio/${bio?.name?.toLowerCase().replace(/\s+/g, '-')}`}>
       <motion.div
         className="relative overflow-hidden rounded-xl bg-white/10 backdrop-blur-sm p-4"
         whileHover={{ scale: 1.02 }}
