@@ -1,60 +1,83 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
+
+interface Button {
+  text: string;
+  onClick: () => void;
+}
 
 interface CallToActionProps {
   title: string;
   description: string;
-  buttonText: string;
-  buttonLink: string;
+  primaryButton: Button;
+  secondaryButton: Button;
 }
 
-export function CallToAction({
+export default function CallToAction({
   title,
   description,
-  buttonText,
-  buttonLink,
+  primaryButton,
+  secondaryButton,
 }: CallToActionProps) {
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 p-8 md:p-12">
-      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm" />
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+      className="relative"
+    >
+      {/* Background Blur Effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 blur-3xl" />
       
-      <div className="relative z-10 text-center">
-        <motion.h2
-          className="text-3xl md:text-4xl font-bold text-white mb-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          {title}
-        </motion.h2>
-        
-        <motion.p
-          className="text-lg text-white/90 mb-8 max-w-2xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
-          {description}
-        </motion.p>
-        
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <Link href={buttonLink}>
+      {/* Content */}
+      <div className="relative bg-white/5 backdrop-blur-lg rounded-2xl p-8 md:p-12 border border-white/10">
+        <div className="max-w-3xl mx-auto text-center space-y-8">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-4xl md:text-5xl font-bold"
+          >
+            {title}
+          </motion.h2>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-xl text-gray-300"
+          >
+            {description}
+          </motion.p>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
             <motion.button
-              className="bg-white text-purple-600 px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition-opacity"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={primaryButton.onClick}
+              className="px-8 py-3 bg-white text-black rounded-full font-semibold hover:bg-white/90 transition-colors"
             >
-              {buttonText}
+              {primaryButton.text}
             </motion.button>
-          </Link>
-        </motion.div>
+            
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={secondaryButton.onClick}
+              className="px-8 py-3 bg-white/10 text-white rounded-full font-semibold hover:bg-white/20 transition-colors"
+            >
+              {secondaryButton.text}
+            </motion.button>
+          </motion.div>
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 } 

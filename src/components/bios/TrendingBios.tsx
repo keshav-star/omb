@@ -9,7 +9,7 @@ const trendingBios = [
     id: 1,
     name: 'Albert Einstein',
     category: 'Scientists',
-    image: '/images/einstein.jpg',
+    image: '/i2.jpg',
     description: 'The father of modern physics who revolutionized our understanding of space and time.',
     tags: ['Physics', 'Nobel Prize', 'Theory of Relativity'],
   },
@@ -17,7 +17,7 @@ const trendingBios = [
     id: 2,
     name: 'Frida Kahlo',
     category: 'Artists',
-    image: '/images/kahlo.jpg',
+    image: '/i2.jpg',
     description: 'A revolutionary artist who transformed pain into powerful self-portraits.',
     tags: ['Painting', 'Mexican Art', 'Self-Portrait'],
   },
@@ -25,7 +25,7 @@ const trendingBios = [
     id: 3,
     name: 'Marie Curie',
     category: 'Scientists',
-    image: '/images/curie.jpg',
+    image: '/i2.jpg',
     description: 'The first woman to win a Nobel Prize and the only person to win in two different fields.',
     tags: ['Physics', 'Chemistry', 'Radioactivity'],
   },
@@ -33,7 +33,7 @@ const trendingBios = [
     id: 4,
     name: 'Steve Jobs',
     category: 'Innovators',
-    image: '/images/jobs.jpg',
+    image: '/i2.jpg',
     description: 'A visionary who transformed personal computing and mobile technology.',
     tags: ['Technology', 'Apple', 'Innovation'],
   },
@@ -41,10 +41,10 @@ const trendingBios = [
 
 export function TrendingBios() {
   return (
-    <div className="py-12">
-      <h2 className="text-3xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">
+    <div className="pb-12">
+      {/* <h2 className="text-3xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">
         Trending Bios
-      </h2>
+      </h2> */}
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {trendingBios.map((bio, index) => (
