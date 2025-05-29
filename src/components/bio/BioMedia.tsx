@@ -75,19 +75,19 @@ export default function BioMedia({ media }: BioMediaProps) {
         animate="show"
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
       >
-        {media[activeTab].map((item) => (
+        {media[activeTab].map((mediaItem) => (
           <motion.div
-            key={item.id}
+            key={mediaItem.id}
             variants={item}
             whileHover={{ scale: 1.02 }}
             className="relative group cursor-pointer"
-            onClick={() => setActiveItem(item)}
+            onClick={() => setActiveItem(mediaItem)}
           >
             <div className="aspect-video rounded-lg overflow-hidden bg-white/10">
-              {item.thumbnail ? (
+              {mediaItem.thumbnail ? (
                 <img
-                  src={item.thumbnail}
-                  alt={item.title}
+                  src={mediaItem.thumbnail}
+                  alt={mediaItem.title}
                   className="w-full h-full object-cover"
                 />
               ) : (
@@ -111,9 +111,9 @@ export default function BioMedia({ media }: BioMediaProps) {
               </div>
             </div>
             <div className="mt-2">
-              <h3 className="text-lg font-semibold">{item.title}</h3>
-              {item.duration && (
-                <p className="text-sm text-gray-400">{item.duration}</p>
+              <h3 className="text-lg font-semibold">{mediaItem.title}</h3>
+              {mediaItem.duration && (
+                <p className="text-sm text-gray-400">{mediaItem.duration}</p>
               )}
             </div>
           </motion.div>

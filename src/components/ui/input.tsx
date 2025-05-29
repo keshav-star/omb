@@ -10,6 +10,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, error, ...props }, ref) => {
     return (
       <div className="relative">
+        {/* @ts-ignore */}
         <motion.input
           ref={ref}
           className={cn(

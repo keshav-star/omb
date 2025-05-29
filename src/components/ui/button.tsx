@@ -27,6 +27,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     return (
+      // @ts-ignore
       <motion.button
         ref={ref}
         className={cn(
