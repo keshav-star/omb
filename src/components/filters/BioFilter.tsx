@@ -36,7 +36,7 @@ export function BioFilter() {
           </div>
         </div>
 
-        <div>
+        {/* <div>
           <h3 className="text-sm font-medium text-gray-400 mb-2">Format</h3>
           <div className="flex flex-wrap gap-2">
             {formats.map((format) => (
@@ -76,7 +76,7 @@ export function BioFilter() {
               </motion.button>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

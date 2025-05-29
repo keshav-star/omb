@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion';
 import { IconArrowRight } from '@tabler/icons-react';
 import { useState, useEffect } from 'react';
-import NavBar from '../NavBar';
+// import NavBar from '../NavBar';
 
 const HeroSection = () => {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
@@ -16,7 +16,7 @@ const HeroSection = () => {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
-      <NavBar />
+      {/* <NavBar /> */}
       
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-black to-black" />

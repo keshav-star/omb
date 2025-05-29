@@ -18,15 +18,15 @@ const NavBar = () => {
   }, []);
 
   const navItems = [
-    { label: 'Home', href: '#' },
-    { label: 'Explore', href: '#' },
-    { label: 'Pricing', href: '#' },
-    { label: 'Request', href: '#' },
+    { label: 'Home', href: '/' },
+    { label: 'Explore', href: '/explore' },
+    { label: 'Pricing', href: '/pricing' },
+    { label: 'Request', href: '/request' },
   ];
 
   const authItems = [
-    { label: 'Login', href: '#' },
-    { label: 'Sign Up', href: '#' },
+    { label: 'Login', href: '/auth/login' },
+    { label: 'Sign Up', href: '/auth/signup' },
   ];
 
   return (
