@@ -1,6 +1,6 @@
-'use client';
 import { motion } from 'framer-motion';
 import { IconHeart, IconList, IconUser, IconCoins } from '@tabler/icons-react';
+import { useRouter } from 'next/navigation';
 
 const features = [
   {
@@ -26,6 +26,7 @@ const features = [
 ];
 
 const FeaturesSection = () => {
+  const router = useRouter();
   return (
     <section className="py-20 bg-black relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -76,6 +77,7 @@ const FeaturesSection = () => {
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
+            onClick={() => router.push('/auth/signup')}
             className="px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-medium hover:from-purple-600 hover:to-pink-600 transition-all duration-300"
           >
             Create Your Account

@@ -96,7 +96,7 @@ export default function FeaturedBios() {
                 
                 <div className="p-4">
                   <Link 
-                    href={`/bios/${bio.slug}`}
+                    href={`/bio/${bio.slug}`}
                     className="inline-block w-full text-center px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300"
                   >
                     Explore Bio
