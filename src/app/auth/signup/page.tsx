@@ -1,172 +1,47 @@
 'use client';
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card } from '@/components/ui/card';
-import { signupSchema, type SignupFormData } from '@/lib/validations/auth';
 import { useAuthStore } from '@/lib/store/auth';
-import { BackgroundBeams } from '@/components/ui/background-beams';
+import { SignupForm } from '@/components/auth/SignupForm';
 
-const SignupPage = () => {
-  const [isLoading, setIsLoading] = useState(false);
+export default function SignupPage() {
   const router = useRouter();
-  const setUser = useAuthStore((state) => state.setUser);
+  const [isLoading, setIsLoading] = useState(true);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<SignupFormData>({
-    resolver: zodResolver(signupSchema),
-  });
-
-  const onSubmit = async (data: SignupFormData) => {
-    try {
-      setIsLoading(true);
-      // TODO: Implement actual signup logic here
-      // For now, we'll simulate a successful signup
-      setUser({
-        id: '1',
-        name: data.name,
-        email: data.email,
-      });
-      router.push('/explore');
-    } catch (error) {
-      console.error('Signup failed:', error);
-    } finally {
+  useEffect(() => {
+    // Give time for auth state to be hydrated from storage
+    const timer = setTimeout(() => {
       setIsLoading(false);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!isLoading && isAuthenticated) {
+      router.push('/profile');
     }
-  };
+  }, [isLoading, isAuthenticated, router]);
+
+  if (isLoading) {
+    return (
+      <main className="min-h-screen bg-black flex items-center justify-center pt-20">
+        <div className="w-8 h-8 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
+      </main>
+    );
+  }
+
+  if (isAuthenticated) {
+    return null;
+  }
 
   return (
-    <main className="min-h-screen bg-black relative">
-      <BackgroundBeams />
-      <div className="relative z-10 flex items-center justify-center min-h-screen">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="w-full max-w-md"
-        >
-          <Card className="p-8 space-y-6 bg-black/50 backdrop-blur-sm border border-white/10">
-            <div className="space-y-2 text-center">
-              <h1 className="text-3xl font-bold text-white">Create Account</h1>
-              <p className="text-gray-400">Join our community today</p>
-            </div>
-
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-              <div className="space-y-2">
-                <Input
-                  {...register('name')}
-                  type="text"
-                  placeholder="Full Name"
-                  className="bg-black/50 border-white/10"
-                />
-                {errors.name && (
-                  <motion.p
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="text-red-500 text-sm"
-                  >
-                    {errors.name.message}
-                  </motion.p>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <Input
-                  {...register('email')}
-                  type="email"
-                  placeholder="Email"
-                  className="bg-black/50 border-white/10"
-                />
-                {errors.email && (
-                  <motion.p
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="text-red-500 text-sm"
-                  >
-                    {errors.email.message}
-                  </motion.p>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <Input
-                  {...register('password')}
-                  type="password"
-                  placeholder="Password"
-                  className="bg-black/50 border-white/10"
-                />
-                {errors.password && (
-                  <motion.p
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="text-red-500 text-sm"
-                  >
-                    {errors.password.message}
-                  </motion.p>
-                )}
-              </div>
-
-              <Button
-                type="submit"
-                className="w-full"
-                disabled={isLoading}
-              >
-                {isLoading ? 'Creating account...' : 'Create Account'}
-              </Button>
-            </form>
-
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-white/10" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-black px-2 text-gray-400">Or continue with</span>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <Button
-                variant="outline"
-                className="w-full"
-                disabled
-                onClick={() => {/* TODO: Implement Google OAuth */}}
-              >
-                Google
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full"
-                disabled
-                onClick={() => {/* TODO: Implement GitHub OAuth */}}
-              >
-                GitHub
-              </Button>
-            </div>
-
-            <p className="text-center text-sm text-gray-400">
-              Already have an account?{' '}
-              <motion.a
-                href="/auth/login"
-                className="text-white hover:underline"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Sign in
-              </motion.a>
-            </p>
-          </Card>
-        </motion.div>
+    <main className="min-h-screen bg-black pt-20">
+      <div className="container mx-auto px-4 py-12">
+        <SignupForm />
       </div>
     </main>
   );
-};
-
-export default SignupPage; 
+} 

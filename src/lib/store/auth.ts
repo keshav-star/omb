@@ -6,6 +6,9 @@ interface User {
   name: string;
   email: string;
   image?: string;
+  planType?: string;
+  credits?: number;
+  joinDate?: string;
 }
 
 interface AuthState {

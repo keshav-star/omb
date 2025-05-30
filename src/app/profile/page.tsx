@@ -3,9 +3,10 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/store/auth';
-import { LoginForm } from '@/components/auth/LoginForm';
+import { ProfileHero } from '@/components/profile/ProfileHero';
+import { ProfileTabs } from '@/components/profile/ProfileTabs';
 
-export default function LoginPage() {
+export default function ProfilePage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
@@ -20,8 +21,8 @@ export default function LoginPage() {
   }, []);
 
   useEffect(() => {
-    if (!isLoading && isAuthenticated) {
-      router.push('/profile');
+    if (!isLoading && !isAuthenticated) {
+      router.push('/auth/login');
     }
   }, [isLoading, isAuthenticated, router]);
 
@@ -33,15 +34,14 @@ export default function LoginPage() {
     );
   }
 
-  if (isAuthenticated) {
+  if (!isAuthenticated) {
     return null;
   }
 
   return (
     <main className="min-h-screen bg-black pt-20">
-      <div className="container mx-auto px-4 py-12">
-        <LoginForm />
-      </div>
+      <ProfileHero />
+      <ProfileTabs />
     </main>
   );
 } 
