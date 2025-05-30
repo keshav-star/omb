@@ -12,7 +12,7 @@ export default function ExplorePage() {
   return (
     <main className="min-h-screen bg-black relative">
       <BackgroundBeams />
-      <div className="relative z-10 mt-10">
+      <div className="relative z-10 m-10">
         {/* <ExploreHero /> */}
         
         <section className="container mx-auto px-4 pt-12">
@@ -24,14 +24,14 @@ export default function ExplorePage() {
           <TrendingBios />
         </section>
 
-        <section className="container mx-auto px-4 py-12">
+        {/* <section className="container mx-auto px-4 py-12"> */}
           {/* <CallToAction 
             title="Join Our Community"
             description="Be part of a growing community of learners and explorers"
             buttonText="Get Started"
             buttonLink="/signup"
           /> */}
-        </section>
+        {/* </section> */}
       </div>
     </main>
   );

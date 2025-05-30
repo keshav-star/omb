@@ -1,4 +1,3 @@
-'use client';
 import { motion } from 'framer-motion';
 import { IconBook, IconHeadphones, IconVideo } from '@tabler/icons-react';
 

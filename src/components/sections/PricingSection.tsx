@@ -1,4 +1,3 @@
-'use client';
 import { motion } from 'framer-motion';
 import { IconCheck } from '@tabler/icons-react';
 
@@ -37,9 +36,13 @@ const pricingPlans = [
   },
 ];
 
-const PricingSection = () => {
+interface PricingSectionProps {
+  scrollRef: React.RefObject<HTMLDivElement>;
+}
+
+const PricingSection = ({scrollRef}: PricingSectionProps) => {
   return (
-    <section className="py-20 bg-black relative overflow-hidden">
+    <section ref={scrollRef} className="py-20 bg-black relative overflow-hidden" id='pricing-section'>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

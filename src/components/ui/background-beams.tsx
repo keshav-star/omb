@@ -1,56 +1,37 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
-export function BackgroundBeams() {
-  const containerRef = useRef<HTMLDivElement>(null);
+export const BackgroundBeams = ({ className }: { className?: string }) => {
+  const beamsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+    if (!beamsRef.current) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
-      const { left, top, width, height } = container.getBoundingClientRect();
+      const { left, top, width, height } = beamsRef.current!.getBoundingClientRect();
       const x = (clientX - left) / width;
       const y = (clientY - top) / height;
 
-      container.style.setProperty('--mouse-x', `${x}`);
-      container.style.setProperty('--mouse-y', `${y}`);
+      beamsRef.current!.style.setProperty('--x', x.toString());
+      beamsRef.current!.style.setProperty('--y', y.toString());
     };
 
-    container.addEventListener('mousemove', handleMouseMove);
-    return () => container.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   return (
     <div
-      ref={containerRef}
-      className="absolute inset-0 overflow-hidden"
-      style={{
-        '--mouse-x': '0.5',
-        '--mouse-y': '0.5',
-      } as React.CSSProperties}
-    >
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-900/20 to-black" />
-      
-      <motion.div
-        className="absolute inset-0 opacity-50"
-        style={{
-          background: 'radial-gradient(circle at calc(var(--mouse-x) * 100%) calc(var(--mouse-y) * 100%), rgba(255, 255, 255, 0.1) 0%, transparent 50%)',
-        }}
-        animate={{
-          scale: [1, 1.2, 1],
-        }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
-      
-      <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20" />
-    </div>
+      ref={beamsRef}
+      className={cn(
+        'absolute inset-0 overflow-hidden',
+        'before:absolute before:inset-0 before:bg-gradient-to-r before:from-purple-500/20 before:to-pink-500/20 before:opacity-0 before:transition-opacity before:duration-500',
+        'after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_calc(var(--x,0.5)*100%)_calc(var(--y,0.5)*100%),rgba(255,255,255,0.1),transparent_50%)]',
+        className
+      )}
+    />
   );
-} 
+}; 
